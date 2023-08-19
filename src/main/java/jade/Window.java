@@ -41,15 +41,16 @@ public class Window {
 
     public static void changeScene(int newScene) {
 
-        switch(newScene) {
+        switch (newScene) {
 
             case 0:
                 currentScene = new LevelEditorScene();
-                //currentScene.init();
+                currentScene.init();
                 break;
 
             case 1:
                 currentScene = new LevelScene();
+                currentScene.init();
                 break;
 
             default:
@@ -59,7 +60,7 @@ public class Window {
     }
 
     public static Window get() {
-        if(Window.window == null) {
+        if (Window.window == null) {
 
             Window.window = new Window();
         }
@@ -90,7 +91,7 @@ public class Window {
         GLFWErrorCallback.createPrint(System.err).set();
 
         // Initialize GLFW
-        if(!glfwInit()) {
+        if (!glfwInit()) {
 
             throw new IllegalStateException("Unable to initialize GLFW");
         }
@@ -104,7 +105,7 @@ public class Window {
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
 
-        if(glfwWindow == NULL) {
+        if (glfwWindow == NULL) {
 
             throw new IllegalStateException("Failed to create the GLFW window");
 
@@ -141,7 +142,7 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
-        while(!glfwWindowShouldClose(glfwWindow)) {
+        while (!glfwWindowShouldClose(glfwWindow)) {
 
             // Poll events
             glfwPollEvents();
@@ -149,7 +150,7 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if(dt >= 0) {
+            if (dt >= 0) {
 
                 currentScene.update(dt);
             }
