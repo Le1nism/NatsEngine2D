@@ -4,6 +4,7 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import util.Time;
 
 import java.util.Objects;
 
@@ -20,10 +21,12 @@ public class Window {
     private String title;
     private long glfwWindow;
 
-    private float r, g, b, a;
+    public float r, g, b, a;
     private boolean fadeToBlack = false;
 
     private static Window window = null;
+
+    private static Scene currentScene;
 
     private Window() {
 
@@ -34,6 +37,25 @@ public class Window {
         g = 1;
         b = 1;
         a = 1;
+    }
+
+    public static void changeScene(int newScene) {
+
+        switch(newScene) {
+
+            case 0:
+                currentScene = new LevelEditorScene();
+                //currentScene.init();
+                break;
+
+            case 1:
+                currentScene = new LevelScene();
+                break;
+
+            default:
+                assert false : "Unknown scene '" + newScene + "'";
+                break;
+        }
     }
 
     public static Window get() {
@@ -110,9 +132,14 @@ public class Window {
          */
         GL.createCapabilities();
 
+        Window.changeScene(0);
     }
 
     public void loop() {
+
+        float beginTime = Time.getTime();
+        float endTime;
+        float dt = -1.0f;
 
         while(!glfwWindowShouldClose(glfwWindow)) {
 
@@ -122,20 +149,16 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if(fadeToBlack) {
+            if(dt >= 0) {
 
-                r = Math.max(r - 0.01f, 0);
-                g = Math.max(g - 0.01f, 0);
-                b = Math.max(b - 0.01f, 0);
-            }
-
-            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
-
-                fadeToBlack = true;
+                currentScene.update(dt);
             }
 
             glfwSwapBuffers(glfwWindow);
 
+            endTime = Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 }
