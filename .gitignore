@@ -10,3 +10,5 @@
 
 # jar files
 **.jar
+
+**/bin
