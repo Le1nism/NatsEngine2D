@@ -32,7 +32,7 @@ public class Window {
 
         this.width = 1920;
         this.height = 1080;
-        this.title = "Mario";
+        this.title = "NatsEditor2D";
         r = 1;
         g = 1;
         b = 1;

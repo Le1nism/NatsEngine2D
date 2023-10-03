@@ -1,0 +1,12 @@
+# Binaries Folders
+**/build
+
+# Windows files
+**.bat
+!gradle.bat
+
+# Ini files
+**.ini
+
+# jar files
+**.jar
