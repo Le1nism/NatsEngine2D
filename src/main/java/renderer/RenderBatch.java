@@ -2,6 +2,7 @@ package renderer;
 
 import components.SpriteRenderer;
 import jade.Window;
+import util.AssetPool;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
@@ -37,8 +38,7 @@ public class RenderBatch {
 
     public RenderBatch(int maxBatchSize) {
 
-        shader = new Shader("assets/shaders/default.glsl");
-        shader.compile();
+        shader = AssetPool.getShader("assets/shaders/default.glsl");
 
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
