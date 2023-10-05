@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.SpriteRenderer;
-import jade.GameObject;
+import natsuki.GameObject;
 
 public class Renderer {
     

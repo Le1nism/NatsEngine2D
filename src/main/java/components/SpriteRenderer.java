@@ -3,8 +3,8 @@ package components;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import jade.Component;
-import jade.Transform;
+import natsuki.Component;
+import natsuki.Transform;
 import renderer.Texture;
 
 public class SpriteRenderer extends Component {

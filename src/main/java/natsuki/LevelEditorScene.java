@@ -1,4 +1,4 @@
-package jade;
+package natsuki;
 
 import org.joml.Vector2f;
 

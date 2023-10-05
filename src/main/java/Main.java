@@ -1,4 +1,4 @@
-import jade.Window;
+import natsuki.Window;
 
 public class Main {
 

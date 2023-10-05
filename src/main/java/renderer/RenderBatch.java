@@ -1,7 +1,7 @@
 package renderer;
 
 import components.SpriteRenderer;
-import jade.Window;
+import natsuki.Window;
 import util.AssetPool;
 
 import static org.lwjgl.opengl.GL15.*;

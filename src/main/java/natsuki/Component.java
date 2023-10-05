@@ -1,4 +1,4 @@
-package jade;
+package natsuki;
 
 public abstract class Component {
     
