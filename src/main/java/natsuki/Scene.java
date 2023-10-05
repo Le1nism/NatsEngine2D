@@ -85,7 +85,7 @@ public abstract class Scene {
         Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Component.class, new ComponentDeserializer()).registerTypeAdapter(GameObject.class, new GameObjectDeserializer()).create();
 
         try {
-            FileWriter writer = new FileWriter("level.txt");
+            FileWriter writer = new FileWriter("level.nat");
             writer.write(gson.toJson(this.gameObjects));
             writer.close();
         } catch (IOException e) {
@@ -99,7 +99,7 @@ public abstract class Scene {
 
         String inFile = "";
         try {
-            inFile = new String(Files.readAllBytes(Paths.get("level.txt")));
+            inFile = new String(Files.readAllBytes(Paths.get("level.nat")));
         } catch (IOException e) {
             e.printStackTrace();
         }
