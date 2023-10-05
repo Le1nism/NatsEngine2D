@@ -2,6 +2,7 @@ package natsuki;
 
 import org.joml.Vector2f;
 
+import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
 import util.AssetPool;
@@ -24,12 +25,12 @@ public class LevelEditorScene extends Scene {
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
-        obj1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
-        obj1.addComponent(new SpriteRenderer(sprites.getSprite(1)));
+        obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 4);
+        obj1.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat1.png"))));
         this.addGameObjectToScene(obj1);
 
-        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
-        obj2.addComponent(new SpriteRenderer(sprites.getSprite(14)));
+        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 2);
+        obj2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat2.png"))));
         this.addGameObjectToScene(obj2);
     }
 
@@ -45,19 +46,6 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-
-        spriteFlipTimeLeft -= dt;
-
-        if (spriteFlipTimeLeft <= 0) {
-
-            spriteFlipTimeLeft = spriteFlipTime;
-            spriteIndex++;
-
-            if (spriteIndex > 4)
-                spriteIndex = 0;
-            
-            obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
-        }
 
         for (GameObject go : this.gameObjects) {
 
