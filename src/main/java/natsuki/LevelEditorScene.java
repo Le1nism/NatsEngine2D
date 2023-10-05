@@ -1,6 +1,10 @@
 package natsuki;
 
 import org.joml.Vector2f;
+import org.joml.Vector4f;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import components.Sprite;
 import components.SpriteRenderer;
@@ -12,6 +16,7 @@ public class LevelEditorScene extends Scene {
 
     private GameObject obj1;
     private Spritesheet sprites;
+    private SpriteRenderer obj1SpriteRenderer;
 
     public LevelEditorScene() {
 
@@ -27,13 +32,28 @@ public class LevelEditorScene extends Scene {
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 4);
-        obj1.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat1.png"))));
+
+        obj1SpriteRenderer = new SpriteRenderer();
+        obj1SpriteRenderer.setColor(new Vector4f(1, 0, 0, 1));
+        obj1.addComponent(obj1SpriteRenderer);
         this.addGameObjectToScene(obj1);
-        this.activeGameObject = obj1;
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 2);
-        obj2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat2.png"))));
+
+        SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
+        Sprite obj2Sprite = new Sprite();
+        obj2Sprite.setTexture(AssetPool.getTexture("assets/images/nat1.png"));
+        obj2SpriteRenderer.setSprite(obj2Sprite);
+        obj2.addComponent(obj2SpriteRenderer);
         this.addGameObjectToScene(obj2);
+        this.activeGameObject = obj1;
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String serialized = gson.toJson(obj1);
+        System.out.println(serialized);
+        GameObject obj = gson.fromJson(serialized, GameObject.class);
+        System.out.println(obj);
     }
 
     private void loadResources() {

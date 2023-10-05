@@ -14,9 +14,13 @@ public class Texture {
 
     private String filepath;
     private int texID;
-    private int width, height;
+    private int width, height; 
     
-    public Texture(String filepath) {
+    /* public Texture(String filepath) {
+
+    } */
+
+    public void init(String filepath) {
 
         this.filepath = filepath;
 

@@ -24,6 +24,9 @@ project.ext.imguiVersion = '1.76-0.9'
 
 dependencies {
 
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     // ImGui
     implementation "io.imgui.java:binding:$imguiVersion"
     implementation "io.imgui.java:lwjgl3:$imguiVersion"
