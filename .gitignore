@@ -11,6 +11,11 @@
 # jar files
 **.jar
 
+# Binary files
 **/bin
 
+# VSCode files
 **/.vscode
+
+# .natsuki Level Files
+**/.nat
