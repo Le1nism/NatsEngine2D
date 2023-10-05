@@ -5,6 +5,7 @@ import org.joml.Vector2f;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
+import imgui.ImGui;
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
@@ -28,6 +29,7 @@ public class LevelEditorScene extends Scene {
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 4);
         obj1.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat1.png"))));
         this.addGameObjectToScene(obj1);
+        this.activeGameObject = obj1;
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 2);
         obj2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/nat2.png"))));
@@ -40,10 +42,6 @@ public class LevelEditorScene extends Scene {
         AssetPool.addSpritesheet("assets/images/spritesheet.png", new Spritesheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
     }
 
-    private int spriteIndex = 0;
-    private float spriteFlipTime = 0.2f;
-    private float spriteFlipTimeLeft = 0.0f;
-
     @Override
     public void update(float dt) {
 
@@ -53,5 +51,13 @@ public class LevelEditorScene extends Scene {
         }
 
         this.renderer.render();
+    }
+
+    @Override
+    public void imGui() {
+
+        ImGui.begin("Natsuki Window");
+        ImGui.text("Just Natsuki");
+        ImGui.end();
     }
 }
