@@ -7,5 +7,5 @@
 </p>
 
 <p align="center">
-  powered by Java, OpenGL & Natsuki
+  powered by Java, OpenGL, IMGui & Natsuki
 </p>
