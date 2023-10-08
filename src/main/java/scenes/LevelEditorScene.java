@@ -7,6 +7,7 @@ import org.joml.Vector4f;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import components.GridLines;
 import components.MouseControls;
 import components.Rigidbody;
 import components.Sprite;
@@ -27,7 +28,7 @@ public class LevelEditorScene extends Scene {
     private Spritesheet sprites;
     private SpriteRenderer obj1SpriteRenderer;
 
-    MouseControls mouseControls = new MouseControls();
+    GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
 
     public LevelEditorScene() {
 
@@ -35,6 +36,9 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+
+        levelEditorStuff.addComponent(new MouseControls());
+        levelEditorStuff.addComponent(new GridLines());
 
         loadResources();
 
@@ -85,7 +89,7 @@ public class LevelEditorScene extends Scene {
 
         DebugDraw.addLine2D(new Vector2f(600, 400), new Vector2f(x, y), new Vector3f(0, 0, 1));
 
-        mouseControls.update(dt);
+        levelEditorStuff.update(dt);
 
         for (GameObject go : this.gameObjects) {
 
@@ -126,7 +130,7 @@ public class LevelEditorScene extends Scene {
 
                 GameObject object = Prefabs.generateSpriteObject(sprite, spriteWidth, spriteHeight);
 
-                mouseControls.pickupObject(object);
+                levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
             }
 
             ImGui.popID();
