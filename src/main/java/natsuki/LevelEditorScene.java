@@ -6,6 +6,7 @@ import org.joml.Vector4f;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import components.Rigidbody;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
@@ -39,6 +40,7 @@ public class LevelEditorScene extends Scene {
         obj1SpriteRenderer = new SpriteRenderer();
         obj1SpriteRenderer.setColor(new Vector4f(1, 0, 0, 1));
         obj1.addComponent(obj1SpriteRenderer);
+        obj1.addComponent(new Rigidbody());
         this.addGameObjectToScene(obj1);
         this.activeGameObject = obj1;
 
