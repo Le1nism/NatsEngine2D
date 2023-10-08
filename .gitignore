@@ -22,3 +22,6 @@
 
 # IntelliJ files
 **/.idea
+
+# Test units
+**/test
