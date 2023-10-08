@@ -38,7 +38,7 @@ public class LevelEditorScene extends Scene {
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
-        obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 4);
+        obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 2);
 
         obj1SpriteRenderer = new SpriteRenderer();
         obj1SpriteRenderer = new SpriteRenderer();
@@ -48,7 +48,7 @@ public class LevelEditorScene extends Scene {
         this.addGameObjectToScene(obj1);
         this.activeGameObject = obj1;
 
-        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 2);
+        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 3);
 
         SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
         Sprite obj2Sprite = new Sprite();
@@ -62,6 +62,7 @@ public class LevelEditorScene extends Scene {
 
         AssetPool.getShader("assets/shaders/default.glsl");
         AssetPool.addSpritesheet("assets/images/spritesheet.png", new Spritesheet(AssetPool.getTexture("assets/images/spritesheet.png"), 16, 16, 26, 0));
+        AssetPool.getTexture("assets/images/nat1.png");
     }
 
     @Override
