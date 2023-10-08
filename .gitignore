@@ -19,3 +19,6 @@
 
 # .natsuki Level Files
 **.nat
+
+# IntelliJ files
+**/.idea
