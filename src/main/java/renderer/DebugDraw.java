@@ -9,6 +9,7 @@ import org.joml.Vector3f;
 
 import natsuki.Window;
 import util.AssetPool;
+import util.JMath;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -133,6 +134,37 @@ public class DebugDraw {
         addLine2D(from, to, color, 1);
     }
 
+    public static void addLine2D(Vector2f from, Vector2f to, Vector3f color, int lifetime) {
+
+        if (lines.size() >= maxLines) return;
+
+        DebugDraw.lines.add(new Line2D(from, to, color, lifetime));
+    }
+
+    // =======================================
+    // Add Box2D methods
+    // =======================================
+    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation, Vector3f color, int lifetime) {
+
+        Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).div(2.0f));
+        Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).div(2.0f));
+
+        Vector2f[] vertices = {
+
+            new Vector2f(min.x, min.y),
+            new Vector2f(min.x, max.y),
+            new Vector2f(max.x, max.y),
+            new Vector2f(max.x, min.y)
+        };
+
+        if (rotation != 0.0f) 
+            for (Vector2f vert : vertices)
+                JMath.rotate(vert, rotation, center);
+    }
+
+    // =======================================
+    // Add Circle methods
+    // =======================================
     public static void addLine2D(Vector2f from, Vector2f to, Vector3f color, int lifetime) {
 
         if (lines.size() >= maxLines) return;
