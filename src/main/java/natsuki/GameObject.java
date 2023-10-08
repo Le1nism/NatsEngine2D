@@ -7,6 +7,9 @@ import components.Component;
 
 public class GameObject {
 
+    private static int idCounter = 0;
+    private int uid = -1;
+
     private String name;
     private List<Component> components;
     public Transform transform;
@@ -26,6 +29,8 @@ public class GameObject {
         this.zIndex = zIndex;
         this.components = new ArrayList<>();
         this.transform = transform;
+
+        this.uid = idCounter++;
     }
 
     public <T extends Component> T getComponent(Class<T> componentClass) {
@@ -62,6 +67,7 @@ public class GameObject {
 
     public void addComponent(Component c) {
 
+        c.generateID();
         this.components.add(c);
         c.gameObject = this;
     }
@@ -87,5 +93,20 @@ public class GameObject {
     public int zIndex() {
 
         return this.zIndex;
+    }
+
+    public static void init(int maxID) {
+
+        idCounter = maxID;
+    }
+
+    public int getUID() {
+
+        return this.uid;
+    }
+
+    public List<Component> getAllComponents() {
+
+        return this.components;
     }
 }

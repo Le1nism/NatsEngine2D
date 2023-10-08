@@ -10,6 +10,9 @@ import imgui.ImGui;
 import natsuki.GameObject;
 
 public abstract class Component {
+
+    private static int idCounter = 0;
+    private int uid = -1;
     
     public transient GameObject gameObject = null;
 
@@ -90,5 +93,21 @@ public abstract class Component {
 
             e.printStackTrace();
         }
+    }
+
+    public void generateID() {
+
+        if (this.uid == -1)
+            this.uid = idCounter++;
+    }
+
+    public int getUID() {
+
+        return this.uid;
+    }
+
+    public static void init(int maxID) {
+
+        idCounter = maxID;
     }
 }
