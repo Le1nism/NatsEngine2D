@@ -1,6 +1,7 @@
 package natsuki;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 import imgui.ImGui;
 
@@ -26,6 +27,11 @@ public abstract class Component {
 
             for (Field field : fields) {
 
+                boolean isPrivate = Modifier.isPrivate(field.getModifiers());
+
+                if (isPrivate)
+                    field.setAccessible(true);
+
                 Class type = field.getType();
                 Object value = field.get(this);
                 String name = field.getName();
@@ -38,6 +44,9 @@ public abstract class Component {
                     if (ImGui.dragInt(name + ": ", imInt))
                         field.set(this, imInt[0]);
                 }
+
+                if (isPrivate)
+                    field.setAccessible(false);
             }
         } catch (IllegalAccessException e) {
 

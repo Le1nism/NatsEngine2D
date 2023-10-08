@@ -30,7 +30,11 @@ public class LevelEditorScene extends Scene {
 
         this.camera = new Camera(new Vector2f(-250, 0));
 
-        if (levelLoaded) return;
+        if (levelLoaded) {
+
+            this.activeGameObject = gameObjects.get(0);
+            return;
+        }
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
