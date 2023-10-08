@@ -54,4 +54,9 @@ public class Line2D {
 
         return this.color;
     }
+
+    public float lengthSquared() {
+
+        return new Vector2f(to).sub(from).lengthSquared();
+    }
 }
