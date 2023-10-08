@@ -1,4 +1,4 @@
-package natsuki;
+package components;
 
 import java.lang.reflect.Type;
 

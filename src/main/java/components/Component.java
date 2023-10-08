@@ -1,4 +1,4 @@
-package natsuki;
+package components;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import imgui.ImGui;
+import natsuki.GameObject;
 
 public abstract class Component {
     

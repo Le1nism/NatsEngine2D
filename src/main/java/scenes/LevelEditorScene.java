@@ -1,4 +1,4 @@
-package natsuki;
+package scenes;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -12,6 +12,9 @@ import components.SpriteRenderer;
 import components.Spritesheet;
 import imgui.ImGui;
 import imgui.ImVec2;
+import natsuki.Camera;
+import natsuki.GameObject;
+import natsuki.Transform;
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {

@@ -4,6 +4,10 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import scenes.LevelEditorScene;
+import scenes.LevelScene;
+import scenes.Scene;
+
 import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;

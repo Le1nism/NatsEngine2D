@@ -3,6 +3,8 @@ package natsuki;
 import java.util.ArrayList;
 import java.util.List;
 
+import components.Component;
+
 public class GameObject {
 
     private String name;

@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import imgui.ImGui;
-import natsuki.Component;
 import natsuki.Transform;
 import renderer.Texture;
 

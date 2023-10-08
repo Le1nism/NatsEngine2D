@@ -1,4 +1,6 @@
-package natsuki;
+package scenes;
+
+import natsuki.Window;
 
 public class LevelScene extends Scene {
 

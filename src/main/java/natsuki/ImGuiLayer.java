@@ -12,6 +12,7 @@ import imgui.enums.ImGuiConfigFlags;
 import imgui.enums.ImGuiKey;
 import imgui.enums.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
+import scenes.Scene;
 
 import static org.lwjgl.glfw.GLFW.*;
 

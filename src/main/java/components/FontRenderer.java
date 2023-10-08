@@ -1,7 +1,5 @@
 package components;
 
-import natsuki.Component;
-
 public class FontRenderer extends Component {
 
     @Override
