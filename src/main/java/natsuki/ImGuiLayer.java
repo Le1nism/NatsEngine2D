@@ -3,7 +3,6 @@ package natsuki;
 import imgui.ImFontAtlas;
 import imgui.ImFontConfig;
 import imgui.ImGui;
-import imgui.ImGuiFreeType;
 import imgui.ImGuiIO;
 import imgui.callbacks.ImStrConsumer;
 import imgui.callbacks.ImStrSupplier;
