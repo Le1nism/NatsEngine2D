@@ -14,11 +14,7 @@ public class Texture {
 
     private String filepath;
     private int texID;
-    private int width, height; 
-    
-    /* public Texture(String filepath) {
-
-    } */
+    private int width, height;
 
     public void init(String filepath) {
 
@@ -74,6 +70,11 @@ public class Texture {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
+    public String getFilepath() {
+
+        return this.filepath;
+    }
+
     public int getWidth() {
 
         return this.width;
@@ -87,5 +88,15 @@ public class Texture {
     public int getId() {
 
         return texID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) return false;
+        if (!(o instanceof Texture)) return false;
+        Texture oTex = (Texture)o;
+
+        return oTex.getWidth() == this.width && oTex.getHeight() == this.height && oTex.getId() == this.texID && oTex.getFilepath().equals(this.filepath);
     }
 }
