@@ -1,6 +1,7 @@
 package scenes;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import components.GridLines;
 import components.MouseControls;
@@ -14,7 +15,7 @@ import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.Prefabs;
 import natsuki.Transform;
-
+import renderer.DebugDraw;
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
@@ -72,10 +73,16 @@ public class LevelEditorScene extends Scene {
         AssetPool.getTexture("assets/images/nat1.png");
     }
 
+    float x = 0.0f;
+    float y = 0.0f;
     @Override
     public void update(float dt) {
 
         levelEditorStuff.update(dt);
+        DebugDraw.addCircle(new Vector2f(x, y), 64, new Vector3f(1, 0, 0), 1);
+
+        x += 50f * dt;
+        y += 50f * dt;
 
         for (GameObject go : this.gameObjects) {
 
