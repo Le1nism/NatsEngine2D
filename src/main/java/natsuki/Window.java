@@ -185,7 +185,7 @@ public class Window {
 
             this.framebuffer.unbind();
 
-            this.imGuiLayer.update(dt, currentScene);
+            // this.imGuiLayer.update(dt, currentScene);
 
             glfwSwapBuffers(glfwWindow);
 

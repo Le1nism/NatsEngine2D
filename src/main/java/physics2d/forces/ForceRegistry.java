@@ -31,7 +31,7 @@ public class ForceRegistry {
         registry.clear();
     }
 
-    public void updateForce(float dt) {
+    public void updateForces(float dt) {
 
         for (ForceRegistration fr : registry)
             fr.fg.updateForce(fr.rb, dt);

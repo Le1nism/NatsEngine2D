@@ -15,6 +15,8 @@ import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.Prefabs;
 import natsuki.Transform;
+import physics2d.PhysicsSystem2D;
+import physics2d.rigidbody.Rigidbody2D;
 import renderer.DebugDraw;
 import util.AssetPool;
 
@@ -23,6 +25,9 @@ public class LevelEditorScene extends Scene {
     private Spritesheet sprites;
 
     GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
+    PhysicsSystem2D physics = new PhysicsSystem2D(1.0f / 60.0f, new Vector2f(0, -10));
+    Transform obj1, obj2;
+    Rigidbody2D rb1, rb2;
 
     public LevelEditorScene() {
 
@@ -32,7 +37,22 @@ public class LevelEditorScene extends Scene {
     public void init() {
 
         levelEditorStuff.addComponent(new MouseControls());
-        levelEditorStuff.addComponent(new GridLines());
+        // levelEditorStuff.addComponent(new GridLines());
+
+        obj1 = new Transform(new Vector2f(100, 500));
+        obj2 = new Transform(new Vector2f(200, 500));
+
+        rb1 = new Rigidbody2D();
+        rb2 = new Rigidbody2D();
+
+        rb1.setRawTransform(obj1);
+        rb2.setRawTransform(obj2);
+
+        rb1.setMass(100.0f);
+        rb2.setMass(200.0f);
+
+        physics.addRigidbody(rb1);
+        physics.addRigidbody(rb2);
 
         loadResources();
 
@@ -72,6 +92,10 @@ public class LevelEditorScene extends Scene {
 
             go.update(dt);
         }
+
+        DebugDraw.addBox2D(obj1.position, new Vector2f(32, 32), 0.0f, new Vector3f(1, 0, 0));
+        DebugDraw.addBox2D(obj2.position, new Vector2f(32, 32), 0.0f, new Vector3f(0.2f, 0.8f, 0.1f));
+        physics.update(dt);
 
         this.renderer.render();
     }
