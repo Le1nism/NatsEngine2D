@@ -40,30 +40,11 @@ public class LevelEditorScene extends Scene {
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheets/decorationsAndBlocks.png");
 
-        if (levelLoaded) {
+        if (levelLoaded)
+            if (gameObjects.size() > 0)
+                this.activeGameObject = gameObjects.get(0);
 
-            this.activeGameObject = gameObjects.get(0);
-            return;
-        }
-
-        /* obj1 = new GameObject("Object 1", new Transform(new Vector2f(300, 100), new Vector2f(256, 256)), 2);
-
-        obj1SpriteRenderer = new SpriteRenderer();
-        obj1SpriteRenderer = new SpriteRenderer();
-        obj1SpriteRenderer.setColor(new Vector4f(1, 0, 0, 1));
-        obj1.addComponent(obj1SpriteRenderer);
-        obj1.addComponent(new Rigidbody());
-        this.addGameObjectToScene(obj1);
-        this.activeGameObject = obj1; */
-
-        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(800, 0), new Vector2f(256, 256)), 3);
-
-        SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
-        Sprite obj2Sprite = new Sprite();
-        obj2Sprite.setTexture(AssetPool.getTexture("assets/images/nat1.png"));
-        obj2SpriteRenderer.setSprite(obj2Sprite);
-        obj2.addComponent(obj2SpriteRenderer);
-        this.addGameObjectToScene(obj2);
+        return;
     }
 
     private void loadResources() {
@@ -71,6 +52,15 @@ public class LevelEditorScene extends Scene {
         AssetPool.getShader("assets/shaders/default.glsl");
         AssetPool.addSpritesheet("assets/images/spritesheets/decorationsAndBlocks.png", new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/decorationsAndBlocks.png"), 16, 16, 81, 0));
         AssetPool.getTexture("assets/images/nat1.png");
+
+        for(GameObject g : gameObjects)
+            if (g.getComponent(SpriteRenderer.class) != null) {
+
+                    SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
+                    if (spr.getTexture() != null)
+                        spr.setTexture(AssetPool.getTexture(spr.getTexture().getFilepath()));
+            }
+
     }
 
     float x = 0.0f;

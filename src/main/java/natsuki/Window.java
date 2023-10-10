@@ -175,7 +175,7 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            this.framebuffer.bind();
+            //this.framebuffer.bind();
 
             if (dt >= 0) {
 
