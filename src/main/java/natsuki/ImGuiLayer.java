@@ -16,6 +16,8 @@ import scenes.Scene;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import editor.GameViewWindow;
+
 public class ImGuiLayer {
 
     private long glfwWindow;
@@ -187,6 +189,7 @@ public class ImGuiLayer {
         setupDockspace();
         currentScene.sceneImGui();
         ImGui.showDemoWindow();
+        GameViewWindow.imGui();
         ImGui.end();
         ImGui.render();
 
