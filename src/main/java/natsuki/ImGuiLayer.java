@@ -1,15 +1,12 @@
 package natsuki;
 
-import imgui.ImFontAtlas;
-import imgui.ImFontConfig;
-import imgui.ImGui;
-import imgui.ImGuiIO;
-import imgui.callbacks.ImStrConsumer;
-import imgui.callbacks.ImStrSupplier;
-import imgui.enums.ImGuiBackendFlags;
-import imgui.enums.ImGuiConfigFlags;
-import imgui.enums.ImGuiKey;
-import imgui.enums.ImGuiMouseCursor;
+import imgui.*;
+import imgui.callback.ImStrConsumer;
+import imgui.callback.ImStrSupplier;
+import imgui.flag.ImGuiBackendFlags;
+import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiKey;
+import imgui.flag.ImGuiMouseCursor;
 import imgui.gl3.ImGuiImplGl3;
 import scenes.Scene;
 
