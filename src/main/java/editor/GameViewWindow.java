@@ -1,11 +1,16 @@
 package editor;
 
+import org.joml.Vector2f;
+
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.flag.ImGuiWindowFlags;
+import natsuki.MouseListener;
 import natsuki.Window;
 
 public class GameViewWindow {
+
+    private static float leftX, rightX, topY, bottomY;
 
     public static void imGui() {
 
@@ -13,10 +18,24 @@ public class GameViewWindow {
 
         ImVec2 windowSize = getLargestSizeForViewport();
         ImVec2 windowPos = getCenteredPositionForViewport(windowSize);
+
         ImGui.setCursorPos(windowPos.x, windowPos.y);
 
+        ImVec2 topLeft = new ImVec2();
+        ImGui.getCursorScreenPos(topLeft);
+        topLeft.x -= ImGui.getScrollX();
+        topLeft.y -= ImGui.getScrollY();
+
+        leftX = topLeft.x;
+        bottomY = topLeft.y;
+        rightX = topLeft.x + windowSize.x;
+        topY = topLeft.y - windowSize.y;
+
         int textureID = Window.getFramebuffer().getTextureID();
-        ImGui.image(textureID, windowSize.x, windowSize.y, 0, 1, 1, 0);
+        ImGui.image(textureID, windowSize.x, windowSize.y, 0, 1, 1, 0 );
+
+        MouseListener.setGameViewportPos(new Vector2f(topLeft.x, topLeft.y));
+        MouseListener.setGameViewportSize(new Vector2f(windowSize.x, windowSize.y));
 
         ImGui.end();
     }
@@ -39,6 +58,11 @@ public class GameViewWindow {
         }
 
         return new ImVec2(aspectWidth, aspectHeight);
+    }
+
+    public static boolean getWantCaptureMouse() {
+
+        return MouseListener.getX() >= leftX && MouseListener.getX() <= rightX && MouseListener.getY() >= bottomY && MouseListener.getY() <= topY;
     }
 
     private static ImVec2 getCenteredPositionForViewport(ImVec2 aspectSize) {
