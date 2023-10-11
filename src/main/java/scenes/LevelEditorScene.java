@@ -70,10 +70,12 @@ public class LevelEditorScene extends Scene {
 
         levelEditorStuff.update(dt);
 
-        for (GameObject go : this.gameObjects) {
-
+        for (GameObject go : this.gameObjects)
             go.update(dt);
-        }
+    }
+
+    @Override
+    public void render() {
 
         this.renderer.render();
     }
