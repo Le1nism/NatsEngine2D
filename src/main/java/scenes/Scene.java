@@ -24,7 +24,6 @@ public abstract class Scene {
     protected Camera camera;
     private boolean isRunning = false;
     protected List<GameObject> gameObjects = new ArrayList<>();
-    protected GameObject activeGameObject = null;
     protected boolean levelLoaded = false;
 
     public Scene() {
@@ -67,18 +66,6 @@ public abstract class Scene {
     public Camera camera() {
 
         return this.camera;
-    }
-
-    public void sceneImGui() {
-
-        if (activeGameObject != null) {
-
-            ImGui.begin("Inspector");
-            activeGameObject.imGui();
-            ImGui.end();
-        }
-
-        imGui();
     }
 
     public void imGui() {

@@ -42,10 +42,6 @@ public class LevelEditorScene extends Scene {
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheets/decorationsAndBlocks.png");
 
-        if (levelLoaded)
-            if (gameObjects.size() > 0)
-                this.activeGameObject = gameObjects.get(0);
-
         return;
     }
 
