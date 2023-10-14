@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -58,6 +59,13 @@ public abstract class Scene {
             go.start();
             this.renderer.add(go);
         }
+    }
+
+    public GameObject getGameObject(int gameObjectID) {
+
+        Optional<GameObject> result = this.gameObjects.stream().filter(gameObject -> gameObject.getUID() == gameObjectID).findFirst();
+
+        return result.orElse(null);
     }
 
     public abstract void update(float dt);

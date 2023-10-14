@@ -10,7 +10,7 @@ import natsuki.Window;
 
 public class GameViewWindow {
 
-    private static float leftX, rightX, topY, bottomY;
+    private float leftX, rightX, topY, bottomY;
 
     public void imGui() {
 

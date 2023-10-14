@@ -25,7 +25,8 @@ public class PropertiesWindow {
                 int x = (int) MouseListener.getScreenX();
                 int y = (int) MouseListener.getScreenY();
 
-                System.out.println(pickingTexture.readPixel(x, y));
+                int gameObjectID = pickingTexture.readPixel(x, y);
+                activeGameObject = currentScene.getGameObject(gameObjectID);
             }
     }
 
@@ -33,7 +34,7 @@ public class PropertiesWindow {
 
         if (activeGameObject != null) {
 
-            ImGui.begin("Inspector");
+            ImGui.begin("Properties");
             activeGameObject.imGui();
             ImGui.end();
         }
