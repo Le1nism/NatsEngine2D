@@ -10,7 +10,7 @@ import natsuki.Window;
 
 public class GameViewWindow {
 
-    private float leftX, rightX, topY, bottomY;
+    private static float leftX, rightX, topY, bottomY;
 
     public void imGui() {
 
@@ -29,7 +29,7 @@ public class GameViewWindow {
         leftX = topLeft.x;
         bottomY = topLeft.y;
         rightX = topLeft.x + windowSize.x;
-        topY = topLeft.y - windowSize.y;
+        topY = topLeft.y + windowSize.y;
 
         int textureID = Window.getFramebuffer().getTextureID();
         ImGui.image(textureID, windowSize.x, windowSize.y, 0, 1, 1, 0 );
@@ -60,7 +60,7 @@ public class GameViewWindow {
         return new ImVec2(aspectWidth, aspectHeight);
     }
 
-    public boolean getWantCaptureMouse() {
+    public static boolean getWantCaptureMouse() {
 
         return MouseListener.getX() >= leftX && MouseListener.getX() <= rightX && MouseListener.getY() >= bottomY && MouseListener.getY() <= topY;
     }

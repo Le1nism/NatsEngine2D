@@ -191,6 +191,14 @@ public class Window {
             Renderer.bindShader(pickingShader);
             currentScene.render();
 
+            if (MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+
+                int x = (int) MouseListener.getScreenX();
+                int y = (int) MouseListener.getScreenY();
+
+                System.out.println(pickingTexture.readPixel(x, y));
+            }
+
             pickingTexture.disableWriting();
             glEnable(GL_BLEND);
             
