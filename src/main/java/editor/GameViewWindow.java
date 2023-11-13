@@ -10,7 +10,7 @@ import natsuki.Window;
 
 public class GameViewWindow {
 
-    private static float leftX, rightX, topY, bottomY;
+    private float leftX, rightX, topY, bottomY;
 
     public void imGui() {
 
@@ -60,7 +60,7 @@ public class GameViewWindow {
         return new ImVec2(aspectWidth, aspectHeight);
     }
 
-    public static boolean getWantCaptureMouse() {
+    public boolean getWantCaptureMouse() {
 
         return MouseListener.getX() >= leftX && MouseListener.getX() <= rightX && MouseListener.getY() >= bottomY && MouseListener.getY() <= topY;
     }
@@ -69,6 +69,9 @@ public class GameViewWindow {
 
         ImVec2 windowSize = new ImVec2();
         ImGui.getContentRegionAvail(windowSize);
+
+        windowSize.x -= ImGui.getScrollX();
+        windowSize.y -= ImGui.getScrollY();
 
         float viewportX = (windowSize.x / 2.0f) - (aspectSize.x / 2.0f);
         float viewportY = (windowSize.y / 2.0f) - (aspectSize.y / 2.0f);

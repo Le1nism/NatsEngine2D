@@ -135,13 +135,14 @@ public class ImGuiLayer {
                 ImGui.setWindowFocus(null);
             }
 
-            if (!io.getWantCaptureMouse() || GameViewWindow.getWantCaptureMouse())
+            if (!io.getWantCaptureMouse() || gameViewWindow.getWantCaptureMouse())
                 MouseListener.mouseButtonCallback(w, button, action, mods);
         });
 
         glfwSetScrollCallback(glfwWindow, (w, xOffset, yOffset) -> {
             io.setMouseWheelH(io.getMouseWheelH() + (float) xOffset);
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
+            MouseListener.mouseScrollCallback(w, xOffset, yOffset);
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {
