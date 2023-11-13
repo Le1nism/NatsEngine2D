@@ -1,5 +1,6 @@
 package components;
 
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import editor.PropertiesWindow;
@@ -19,6 +20,9 @@ public class TranslateGizmo extends Component {
     private SpriteRenderer xAxisSprite;
     private SpriteRenderer yAxisSprite;
     private GameObject activeGameObject = null;
+
+    private Vector2f xAxisOffset = new Vector2f(64, -5);
+    private Vector2f yAxisOffset = new Vector2f(16, 61);
 
     private PropertiesWindow propertiesWindow;
 
@@ -52,6 +56,8 @@ public class TranslateGizmo extends Component {
 
             this.xAxisObject.transform.position.set(this.activeGameObject.transform.position);
             this.yAxisObject.transform.position.set(this.activeGameObject.transform.position);
+            this.xAxisObject.transform.position.add(this.xAxisOffset);
+            this.yAxisObject.transform.position.add(this.yAxisOffset);
         }
 
         this.activeGameObject = this.propertiesWindow.getActiveGameObject();
