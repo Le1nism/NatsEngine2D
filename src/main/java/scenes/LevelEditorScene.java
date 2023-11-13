@@ -42,6 +42,8 @@ public class LevelEditorScene extends Scene {
         levelEditorStuff.addComponent(new EditorCamera(this.camera));
         levelEditorStuff.addComponent(new TranslateGizmo(gizmos.getSprite(1), Window.getImGuiLayer().getPropertiesWindow()));
 
+        levelEditorStuff.start();
+
         return;
     }
 

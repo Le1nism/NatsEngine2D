@@ -2,7 +2,6 @@ package renderer;
 
 import components.SpriteRenderer;
 import natsuki.Window;
-import util.AssetPool;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
@@ -14,6 +13,7 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -185,6 +185,16 @@ public class RenderBatch implements Comparable<RenderBatch> {
                     break;
                 }
 
+        boolean isRotated = sprite.gameObject.transform.rotation != 0.0f;
+        Matrix4f transformMatrix = new Matrix4f().identity();
+
+        if (isRotated) {
+
+            transformMatrix.translate(sprite.gameObject.transform.position.x, sprite.gameObject.transform.position.y, 0f);
+            transformMatrix.rotate((float) Math.toRadians(sprite.gameObject.transform.rotation), 0, 0, 1);
+            transformMatrix.scale(sprite.gameObject.transform.scale.x, sprite.gameObject.transform.scale.y, 1);
+        }
+
         // Add vertice with appropriate properties
         float xAdd = 1.0f;
         float yAdd = 1.0f;
@@ -197,10 +207,15 @@ public class RenderBatch implements Comparable<RenderBatch> {
                 xAdd = 0.0f;
             else if (i == 3)
                 yAdd = 1.0f;
+
+            Vector4f currentPos = new Vector4f(sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x), sprite.gameObject.transform.position.y + (yAdd * sprite.gameObject.transform.scale.y), 0, 1);
+
+            if (isRotated)
+                currentPos = new Vector4f(xAdd, yAdd, 0, 1).mul(transformMatrix);
             
             // Load position
-            vertices[offset] = sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x);
-            vertices[offset + 1] = sprite.gameObject.transform.position.y + (yAdd * sprite.gameObject.transform.scale.y);
+            vertices[offset] = currentPos.x;
+            vertices[offset + 1] = currentPos.y;
 
             // Load color
             vertices[offset + 2] = color.x;

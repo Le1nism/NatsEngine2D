@@ -39,7 +39,10 @@ public class TranslateGizmo extends Component {
     @Override
     public void start() {
 
-
+        this.xAxisObject.transform.rotation = 90;
+        this.yAxisObject.transform.rotation = 180;
+        this.xAxisObject.setNoSerialize();
+        this.yAxisObject.setNoSerialize();
     }
 
     @Override
