@@ -5,6 +5,7 @@ import org.joml.Vector4f;
 
 import editor.PropertiesWindow;
 import natsuki.GameObject;
+import natsuki.MouseListener;
 import natsuki.Prefabs;
 import natsuki.Window;
 
