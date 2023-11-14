@@ -2,11 +2,14 @@ package natsuki;
 
 import org.joml.Vector2f;
 
-public class Transform {
+import components.Component;
+
+public class Transform extends Component {
     
     public Vector2f position;
     public Vector2f scale;
     public float rotation = 0.0f;
+    public int zIndex;
 
     public Transform() {
 
@@ -27,6 +30,7 @@ public class Transform {
 
         this.position = position;
         this.scale = scale;
+        this.zIndex = 0;
     }
 
     public Transform copy() {
@@ -47,6 +51,6 @@ public class Transform {
         if (!(o instanceof Transform)) return false;
 
         Transform t = (Transform)o;
-        return t.position.equals(this.position) && t.scale.equals(this.scale);
+        return t.position.equals(this.position) && t.scale.equals(this.scale) && t.rotation == this.rotation && t.zIndex == this.zIndex;
     }
 }

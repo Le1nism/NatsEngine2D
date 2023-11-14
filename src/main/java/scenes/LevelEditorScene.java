@@ -7,21 +7,22 @@ import components.EditorCamera;
 import components.GizmoSystem;
 import components.GridLines;
 import components.MouseControls;
-import components.ScaleGizmo;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
-import components.TranslateGizmo;
+
 import imgui.ImGui;
 import imgui.ImVec2;
+
 import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.Prefabs;
 import natsuki.Transform;
-import natsuki.Window;
+
 import physics2d.PhysicsSystem2D;
 import physics2d.primitives.Circle;
 import physics2d.rigidbody.Rigidbody2D;
+
 import renderer.DebugDraw;
 import util.AssetPool;
 
@@ -29,7 +30,7 @@ public class LevelEditorScene extends Scene {
 
     private Spritesheet sprites;
 
-    GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
+    GameObject levelEditorStuff = this.createGameObject("LevelEditor");
     PhysicsSystem2D physics = new PhysicsSystem2D(1.0f / 60.0f, new Vector2f(0, -10));
     Transform obj1, obj2;
     Rigidbody2D rb1, rb2;

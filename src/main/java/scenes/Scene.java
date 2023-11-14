@@ -13,10 +13,11 @@ import com.google.gson.GsonBuilder;
 
 import components.Component;
 import components.ComponentDeserializer;
-import imgui.ImGui;
+
 import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.GameObjectDeserializer;
+import natsuki.Transform;
 import renderer.Renderer;
 
 public abstract class Scene {
@@ -79,6 +80,15 @@ public abstract class Scene {
     public void imGui() {
 
 
+    }
+
+    public GameObject createGameObject(String name) {
+
+        GameObject go = new GameObject(name);
+        go.addComponent(new Transform());
+        go.transform = go.getComponent(Transform.class);
+
+        return go;
     }
 
     public void saveExit() {
