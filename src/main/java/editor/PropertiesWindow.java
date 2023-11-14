@@ -8,6 +8,8 @@ import scenes.Scene;
 
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
 
+import components.NonPickable;
+
 public class PropertiesWindow {
 
     private GameObject activeGameObject = null;
@@ -30,7 +32,12 @@ public class PropertiesWindow {
                 int y = (int) MouseListener.getScreenY();
 
                 int gameObjectID = pickingTexture.readPixel(x, y);
-                activeGameObject = currentScene.getGameObject(gameObjectID);
+                GameObject pickedObj = currentScene.getGameObject(gameObjectID);
+
+                if (pickedObj != null && pickedObj.getComponent(NonPickable.class) == null)
+                    activeGameObject = pickedObj;
+                else if (pickedObj == null && !MouseListener.isDragging())
+                    activeGameObject = null;
 
                 this.debounce = 0.2f;
             }

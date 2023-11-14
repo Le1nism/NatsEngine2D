@@ -40,6 +40,9 @@ public class TranslateGizmo extends Component {
 
         this.propertiesWindow = propertiesWindow;
 
+        this.xAxisObject.addComponent(new NonPickable());
+        this.yAxisObject.addComponent(new NonPickable());
+
         Window.getScene().addGameObjectToScene(this.xAxisObject);
         Window.getScene().addGameObjectToScene(this.yAxisObject);
     }
