@@ -80,7 +80,8 @@ public class GameObject {
 
     public void start() {
 
-        for (Component component : components) component.start();
+        for (int i = 0; i < components.size(); i++)
+            components.get(i).start();
     }
 
     public void imGui() {
