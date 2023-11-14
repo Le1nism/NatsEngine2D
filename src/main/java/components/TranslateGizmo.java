@@ -3,6 +3,8 @@ package components;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+
 import editor.PropertiesWindow;
 import natsuki.GameObject;
 import natsuki.MouseListener;
@@ -27,6 +29,9 @@ public class TranslateGizmo extends Component {
 
     private int gizmoWidth = 16;
     private int gizmoHeight = 48;
+
+    private boolean xAxisActive = false;
+    private boolean yAxisActive = false;
 
     private PropertiesWindow propertiesWindow;
 
@@ -69,6 +74,20 @@ public class TranslateGizmo extends Component {
 
         boolean xAxisHot = checkXHoverState();
         boolean yAxisHot = checkYHoverState();
+
+        if ((xAxisHot || xAxisActive) && MouseListener.isDragging() && MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+
+            xAxisActive = true;
+            yAxisActive = false;
+        } else if ((yAxisHot || yAxisActive) && MouseListener.isDragging() && MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+
+            xAxisActive = false;
+            yAxisActive = true;
+        } else {
+
+            xAxisActive = false;
+            yAxisActive = false;
+        }
 
         if (this.activeGameObject != null) {
 
