@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.Component;
+import imgui.ImGui;
 
 public class GameObject {
 
@@ -77,6 +78,7 @@ public class GameObject {
 
         for (Component c : components) {
 
+            if (ImGui.collapsingHeader(c.getClass().getSimpleName()))
             c.imGui();
         }
     }

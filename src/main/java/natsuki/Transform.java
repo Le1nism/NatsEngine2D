@@ -3,6 +3,7 @@ package natsuki;
 import org.joml.Vector2f;
 
 import components.Component;
+import editor.JImGui;
 
 public class Transform extends Component {
     
@@ -36,6 +37,15 @@ public class Transform extends Component {
     public Transform copy() {
 
         return new Transform(new Vector2f(this.position), new Vector2f(this.scale));
+    }
+
+    @Override
+    public void imGui() {
+
+        JImGui.drawVec2Control("Position", this.position);
+        JImGui.drawVec2Control("Scale", this.scale, 32.0f);
+        JImGui.dragFloat("Rotation", this.rotation);
+        JImGui.dragInt("Z-Index", this.zIndex);
     }
 
     public void copy(Transform to) {
