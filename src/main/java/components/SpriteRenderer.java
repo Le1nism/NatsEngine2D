@@ -4,8 +4,9 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import editor.JImGui;
-import imgui.ImGui;
+
 import natsuki.Transform;
+
 import renderer.Texture;
 
 public class SpriteRenderer extends Component {
@@ -39,6 +40,11 @@ public class SpriteRenderer extends Component {
 
             this.isDirty = true;
         }
+    }
+
+    public void setDirty() {
+
+        this.isDirty = true;
     }
 
     public Vector4f getColor() {

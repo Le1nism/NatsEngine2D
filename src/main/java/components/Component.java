@@ -102,6 +102,11 @@ public abstract class Component {
             this.uid = idCounter++;
     }
 
+    public void destroy() {
+
+        
+    }
+
     public int getUID() {
 
         return this.uid;

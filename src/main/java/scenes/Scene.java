@@ -20,6 +20,7 @@ import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.GameObjectDeserializer;
 import natsuki.Transform;
+import physics2d.Physics2D;
 import renderer.Renderer;
 
 public class Scene {
@@ -29,6 +30,7 @@ public class Scene {
     private boolean isRunning = false;
     private List<GameObject> gameObjects = new ArrayList<>();
     private boolean levelLoaded = false;
+    private Physics2D physics2D;
 
     private SceneInitializer sceneInitializer;
 
@@ -69,6 +71,12 @@ public class Scene {
         }
     }
 
+    public void destroy() {
+
+        for (GameObject go : gameObjects)
+            go.destroy();
+    }
+
     public List<GameObject> getGameObjects() {
 
         return this.gameObjects;
@@ -85,8 +93,19 @@ public class Scene {
 
         this.camera.adjustProjection();
 
-        for (GameObject go : this.gameObjects)
+        for (int i = 0; i < gameObjects.size(); i++) {
+
+            GameObject go = gameObjects.get(i);
             go.update(dt);
+
+            if (go.isDead()) {
+
+                gameObjects.remove(i);
+                this.renderer.destroyGameObject(go);
+                this.physics2D.destroyGameObject(go);
+                i--;
+            }
+        }
     }
 
     public void render() {
