@@ -79,7 +79,7 @@ public class Rigidbody2D extends Component {
         this.bodyType = bodyType;
     }
 
-    public boolean getFixedRotation() {
+    public boolean isFixedRotation() {
 
         return fixedRotation;
     }
@@ -89,7 +89,7 @@ public class Rigidbody2D extends Component {
         this.fixedRotation = fixedRotation;
     }
 
-    public boolean getContinuousCollision() {
+    public boolean isContinuousCollision() {
 
         return continuousCollision;
     }
