@@ -18,6 +18,7 @@ import scenes.Scene;
 import static org.lwjgl.glfw.GLFW.*;
 
 import editor.GameViewWindow;
+import editor.MenuBar;
 import editor.PropertiesWindow;
 
 public class ImGuiLayer {
@@ -32,12 +33,14 @@ public class ImGuiLayer {
 
     private GameViewWindow gameViewWindow;
     private PropertiesWindow propertiesWindow;
+    private MenuBar menuBar;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture) {
 
         this.glfwWindow = glfwWindow;
         this.gameViewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
+        this.menuBar = new MenuBar();
     }
     
     // Initialize Dear ImGui.
@@ -200,6 +203,7 @@ public class ImGuiLayer {
         gameViewWindow.imGui();
         propertiesWindow.update(dt, currentScene);
         propertiesWindow.imGui();
+        menuBar.imGui();
         ImGui.end();
         ImGui.render();
 
