@@ -8,9 +8,6 @@
 # Ini files
 **.ini
 
-# jar files
-**.jar
-
 # Binary files
 **/bin
 
