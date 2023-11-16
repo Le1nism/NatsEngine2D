@@ -34,6 +34,16 @@ public class SpriteRenderer extends Component {
     }
 
     @Override
+    public void editorUpdate(float dt) {
+
+        if (!this.lastTransform.equals(this.gameObject.transform)) {
+
+            this.gameObject.transform.copy(this.lastTransform);
+            isDirty = true;
+        }
+    }
+
+    @Override
     public void imGui() {
 
         if (JImGui.colorPicker4("Color Picker", this.color)) {

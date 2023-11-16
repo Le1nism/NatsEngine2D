@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL;
 import observers.EventSystem;
 import observers.Observer;
 import observers.events.Event;
-import observers.events.EventType;
 
 import renderer.DebugDraw;
 import renderer.Framebuffer;
@@ -35,6 +34,7 @@ public class Window implements Observer {
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
     private PickingTexture pickingTexture;
+    private boolean runtimePlaying = false;
 
     private static Window window = null;
 
@@ -50,10 +50,10 @@ public class Window implements Observer {
 
     public static void changeScene(SceneInitializer sceneInitializer) {
 
-        if (currentScene != null) {
+        if (currentScene != null)
+            currentScene.destroy();
 
-            // Destroy it
-        }
+        getImGuiLayer().getPropertiesWindow().setActiveGameObject(null);
 
         currentScene = new Scene(sceneInitializer);
         currentScene.load();
@@ -198,7 +198,10 @@ public class Window implements Observer {
 
                 DebugDraw.draw();
                 Renderer.bindShader(defaultShader);
-                currentScene.update(dt);
+
+                if (runtimePlaying) currentScene.update(dt);
+                else currentScene.editorUpdate(dt);
+
                 currentScene.render();
             }
 
@@ -214,8 +217,6 @@ public class Window implements Observer {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-
-        currentScene.saveExit();
     }
 
     public static int getWidth() {
@@ -256,12 +257,23 @@ public class Window implements Observer {
     @Override
     public void onNotify(GameObject object, Event event) {
 
-        if (event.type == EventType.GameEngineStartPlay) {
+        switch (event.type) {
 
-            System.out.println("Starting play!");
-        } else if (event.type == EventType.GameEngineStopPlay) {
+            case GameEngineStartPlay:
+                this.runtimePlaying = true;
+                break;
 
-            System.out.println("Ending play!");
+            case GameEngineStopPlay:
+                this.runtimePlaying = false;
+                break;
+
+            case LoadLevel:
+                Window.changeScene(new LevelEditorSceneInitializer());
+                break;
+
+            case SaveLevel:
+                currentScene.save();
+                break;
         }
     }
 }

@@ -24,7 +24,7 @@ public class GizmoSystem extends Component {
     }
 
     @Override
-    public void update(float dt) {
+    public void editorUpdate(float dt) {
 
         if (usingGizmo == 0) {
 

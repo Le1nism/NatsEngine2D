@@ -28,6 +28,11 @@ public abstract class Component {
 
     }
 
+    public void editorUpdate(float dt) {
+
+        
+    }
+
     public void imGui() {
 
         try {
@@ -104,7 +109,7 @@ public abstract class Component {
 
     public void destroy() {
 
-        
+
     }
 
     public int getUID() {
