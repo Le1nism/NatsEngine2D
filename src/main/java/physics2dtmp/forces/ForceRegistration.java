@@ -1,6 +1,6 @@
-package physics2d.forces;
+package physics2dtmp.forces;
 
-import physics2d.rigidbody.Rigidbody2D;
+import physics2dtmp.rigidbody.Rigidbody2D;
 
 public class ForceRegistration {
 

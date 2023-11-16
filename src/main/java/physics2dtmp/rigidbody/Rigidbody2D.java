@@ -1,10 +1,10 @@
-package physics2d.rigidbody;
+package physics2dtmp.rigidbody;
 
 import org.joml.Vector2f;
 
 import components.Component;
 import natsuki.Transform;
-import physics2d.primitives.Collider2D;
+import physics2dtmp.primitives.Collider2D;
 
 public class Rigidbody2D extends Component {
 

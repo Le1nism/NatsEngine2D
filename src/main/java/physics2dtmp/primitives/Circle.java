@@ -1,8 +1,8 @@
-package physics2d.primitives;
+package physics2dtmp.primitives;
 
 import org.joml.Vector2f;
 
-import physics2d.rigidbody.Rigidbody2D;
+import physics2dtmp.rigidbody.Rigidbody2D;
 
 public class Circle extends Collider2D{
 

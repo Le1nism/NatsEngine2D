@@ -1,4 +1,4 @@
-package physics2d.rigidbody;
+package physics2dtmp.rigidbody;
 
 import java.util.ArrayList;
 import java.util.List;

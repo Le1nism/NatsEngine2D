@@ -18,11 +18,9 @@ import natsuki.Camera;
 import natsuki.GameObject;
 import natsuki.Prefabs;
 import natsuki.Transform;
-
-import physics2d.PhysicsSystem2D;
-import physics2d.primitives.Circle;
-import physics2d.rigidbody.Rigidbody2D;
-
+import physics2dtmp.PhysicsSystem2D;
+import physics2dtmp.primitives.Circle;
+import physics2dtmp.rigidbody.Rigidbody2D;
 import renderer.DebugDraw;
 import util.AssetPool;
 
