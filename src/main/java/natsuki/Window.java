@@ -4,6 +4,10 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import observers.EventSystem;
+import observers.Observer;
+import observers.events.Event;
+import observers.events.EventType;
 import renderer.DebugDraw;
 import renderer.Framebuffer;
 import renderer.PickingTexture;
@@ -21,7 +25,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class Window {
+public class Window implements Observer {
 
     private int width, height;
     private String title;
@@ -29,8 +33,6 @@ public class Window {
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
     private PickingTexture pickingTexture;
-
-    public float r, g, b, a;
 
     private static Window window = null;
 
@@ -41,10 +43,7 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "NatsEditor2D";
-        r = 1;
-        g = 1;
-        b = 1;
-        a = 1;
+        EventSystem.addObserver(this);
     }
 
     public static void changeScene(int newScene) {
@@ -199,7 +198,7 @@ public class Window {
 
             this.framebuffer.bind();
 
-            glClearColor(r, g, b, a);
+            glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt >= 0) {
@@ -259,5 +258,17 @@ public class Window {
     public static ImGuiLayer getImGuiLayer() {
 
         return get().imGuiLayer;
+    }
+
+    @Override
+    public void onNotify(GameObject object, Event event) {
+
+        if (event.type == EventType.GameEngineStartPlay) {
+
+            System.out.println("Starting play!");
+        } else if (event.type == EventType.GameEngineStopPlay) {
+
+            System.out.println("Ending play!");
+        }
     }
 }
