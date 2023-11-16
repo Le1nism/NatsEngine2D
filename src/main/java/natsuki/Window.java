@@ -8,14 +8,16 @@ import observers.EventSystem;
 import observers.Observer;
 import observers.events.Event;
 import observers.events.EventType;
+
 import renderer.DebugDraw;
 import renderer.Framebuffer;
 import renderer.PickingTexture;
 import renderer.Renderer;
 import renderer.Shader;
-import scenes.LevelEditorScene;
-import scenes.LevelScene;
+
+import scenes.LevelEditorSceneInitializer;
 import scenes.Scene;
+import scenes.SceneInitializer;
 import util.AssetPool;
 
 import java.util.Objects;
@@ -46,23 +48,14 @@ public class Window implements Observer {
         EventSystem.addObserver(this);
     }
 
-    public static void changeScene(int newScene) {
+    public static void changeScene(SceneInitializer sceneInitializer) {
 
-        switch (newScene) {
+        if (currentScene != null) {
 
-            case 0:
-                currentScene = new LevelEditorScene();
-                break;
-
-            case 1:
-                currentScene = new LevelScene();
-                break;
-
-            default:
-                assert false : "Unknown scene '" + newScene + "'";
-                break;
+            // Destroy it
         }
 
+        currentScene = new Scene(sceneInitializer);
         currentScene.load();
         currentScene.init();
         currentScene.start();
@@ -162,7 +155,7 @@ public class Window implements Observer {
         this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
         this.imGuiLayer.initImGui();
 
-        Window.changeScene(0);
+        Window.changeScene(new LevelEditorSceneInitializer());
     }
 
     public void loop() {

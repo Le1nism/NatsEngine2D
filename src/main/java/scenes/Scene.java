@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.joml.Vector2f;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,28 +22,33 @@ import natsuki.GameObjectDeserializer;
 import natsuki.Transform;
 import renderer.Renderer;
 
-public abstract class Scene {
+public class Scene {
     
-    protected Renderer renderer = new Renderer();
-    protected Camera camera;
+    private Renderer renderer = new Renderer();
+    private Camera camera;
     private boolean isRunning = false;
-    protected List<GameObject> gameObjects = new ArrayList<>();
-    protected boolean levelLoaded = false;
+    private List<GameObject> gameObjects = new ArrayList<>();
+    private boolean levelLoaded = false;
 
-    public Scene() {
+    private SceneInitializer sceneInitializer;
 
+    public Scene(SceneInitializer sceneInitializer) {
 
+        this.sceneInitializer = sceneInitializer;
     }
 
     public void init() {
 
-        
+        this.camera = new Camera(new Vector2f(-250, 0));
+        this.sceneInitializer.loadResources(this);
+        this.sceneInitializer.init(this);
     }
 
     public void start() {
 
-        for (GameObject go : gameObjects) {
+        for (int i = 0; i < gameObjects.size(); i++) {
 
+            GameObject go = gameObjects.get(i);
             go.start();
             this.renderer.add(go);
         }
@@ -62,6 +69,11 @@ public abstract class Scene {
         }
     }
 
+    public List<GameObject> getGameObjects() {
+
+        return this.gameObjects;
+    }
+
     public GameObject getGameObject(int gameObjectID) {
 
         Optional<GameObject> result = this.gameObjects.stream().filter(gameObject -> gameObject.getUID() == gameObjectID).findFirst();
@@ -69,8 +81,18 @@ public abstract class Scene {
         return result.orElse(null);
     }
 
-    public abstract void update(float dt);
-    public abstract void render();
+    public void update(float dt) {
+
+        this.camera.adjustProjection();
+
+        for (GameObject go : this.gameObjects)
+            go.update(dt);
+    }
+
+    public void render() {
+
+        this.renderer.render();
+    }
 
     public Camera camera() {
 
@@ -79,7 +101,7 @@ public abstract class Scene {
 
     public void imGui() {
 
-
+        this.sceneInitializer.imGui();
     }
 
     public GameObject createGameObject(String name) {
