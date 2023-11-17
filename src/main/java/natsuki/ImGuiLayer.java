@@ -4,6 +4,7 @@ import imgui.ImFontAtlas;
 import imgui.ImFontConfig;
 import imgui.ImGui;
 import imgui.ImGuiIO;
+import imgui.ImGuiViewport;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;
 import imgui.flag.ImGuiConfigFlags;
@@ -56,8 +57,8 @@ public class ImGuiLayer {
         final ImGuiIO io = ImGui.getIO();
 
         io.setIniFilename("imgui.ini"); // We don't want to save .ini file
-        // io.setConfigFlags(ImGuiConfigFlags.ViewportsEnable);
-        io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
+        io.addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
         // ------------------------------------------------------------
@@ -189,10 +190,10 @@ public class ImGuiLayer {
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 
-         /* long backupWindowPtr = glfwGetCurrentContext();
+        long backupWindowPtr = glfwGetCurrentContext();
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
-        glfwMakeContextCurrent(backupWindowPtr); */
+        glfwMakeContextCurrent(backupWindowPtr);
     }
 
     // If you want to clean a room after yourself - do it by yourself
@@ -205,10 +206,10 @@ public class ImGuiLayer {
 
         int windowFlags = ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoDocking;
 
-        /* ImGuiViewport mainViewport = ImGui.getMainViewport();
+        ImGuiViewport mainViewport = ImGui.getMainViewport();
         ImGui.setNextWindowPos(mainViewport.getWorkPosX(), mainViewport.getWorkPosY());
         ImGui.setNextWindowSize(mainViewport.getWorkSizeX(), mainViewport.getWorkSizeY());
-        ImGui.setNextWindowViewport(mainViewport.getID()); */
+        ImGui.setNextWindowViewport(mainViewport.getID());
         ImGui.setWindowPos(0.0f, 0.0f);
         ImGui.setNextWindowSize(Window.getWidth(), Window.getHeight());
         ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, 0.0f);

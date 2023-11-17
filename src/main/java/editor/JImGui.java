@@ -6,6 +6,7 @@ import org.joml.Vector4f;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
+import imgui.type.ImString;
 
 public class JImGui {
 
@@ -129,5 +130,29 @@ public class JImGui {
         ImGui.popID();
 
         return res;
+    }
+
+    public static String inputText(String label, String text) {
+
+        ImGui.pushID(label);
+
+        ImGui.columns(2);
+        ImGui.setColumnWidth(0, defaultColumnWidth);
+        ImGui.text(label);
+        ImGui.nextColumn();
+
+        ImString outString = new ImString(text, 256);
+        if (ImGui.inputText("##" + label, outString)) {
+
+            ImGui.columns(1);
+            ImGui.popID();
+
+            return outString.get();
+        }
+
+        ImGui.columns(1);
+        ImGui.popID();
+
+        return text;
     }
 }
