@@ -9,6 +9,7 @@ import org.joml.Vector4f;
 
 import editor.JImGui;
 import imgui.ImGui;
+import imgui.type.ImInt;
 import natsuki.GameObject;
 
 public abstract class Component {
@@ -90,6 +91,14 @@ public abstract class Component {
 
                     Vector2f val = (Vector2f)value;
                     JImGui.drawVec2Control(name, val);
+                } else if (type.isEnum()) {
+
+                    String[] enumValues = getEnumValues(type);
+                    String enumType = ((Enum) value).name();
+
+                    ImInt index = new ImInt(indexOf(enumType, enumValues)); 
+                    if (ImGui.combo(field.getName(), index, enumValues, enumValues.length))
+                        field.set(this, type.getEnumConstants()[index.get()]);
                 }
 
                 if (isPrivate)
@@ -105,6 +114,28 @@ public abstract class Component {
 
         if (this.uid == -1)
             this.uid = idCounter++;
+    }
+
+    private <T extends Enum<T>> String[] getEnumValues(Class<T> enumType) {
+
+        String[] enumValues = new String[enumType.getEnumConstants().length];
+        int i = 0;
+
+        for (T enumIntegerValue : enumType.getEnumConstants()) {
+
+            enumValues[i] = enumIntegerValue.name();
+            i++;
+        }
+
+        return enumValues;
+    }
+
+    private int indexOf(String str, String[] arr) {
+
+        for (int i = 0; i < arr.length; i++)
+            if (str.equals(arr[i])) return i;
+
+        return -1;
     }
 
     public void destroy() {
