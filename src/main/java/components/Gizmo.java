@@ -6,6 +6,7 @@ import org.joml.Vector4f;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DELETE;
 
 import editor.PropertiesWindow;
 import natsuki.GameObject;
@@ -94,6 +95,13 @@ public class Gizmo extends Component {
                 Window.getScene().addGameObjectToScene(newObj);
                 newObj.transform.position.add(0.1f, 0.1f);
                 this.propertiesWindow.setActiveGameObject(newObj);
+
+                return;
+            } else if (KeyListener.keyBeginPress(GLFW_KEY_DELETE)) {
+
+                activeGameObject.destroy();
+                this.setInactive();
+                this.propertiesWindow.setActiveGameObject(null);
 
                 return;
             }

@@ -49,10 +49,11 @@ public class RenderBatch implements Comparable<RenderBatch> {
     private int maxBatchSize;
     private int zIndex;
 
-    public RenderBatch(int maxBatchSize, int zIndex) {
+    private Renderer renderer;
 
-        // shader = AssetPool.getShader("assets/shaders/default.glsl");
+    public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
 
+        this.renderer = renderer;
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
         this.zIndex = zIndex;
@@ -130,6 +131,15 @@ public class RenderBatch implements Comparable<RenderBatch> {
                 loadVertexProperties(i);
                 spr.setClean();
                 rebufferData = true;
+            }
+
+            // TODO: Get better solution for this
+            if (spr.gameObject.transform.zIndex != this.zIndex) {
+
+                destroyIfExists(spr.gameObject);
+                renderer.add(spr.gameObject);
+
+                i--;
             }
         }
 
