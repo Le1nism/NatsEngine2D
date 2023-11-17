@@ -23,7 +23,7 @@ dependencies {
 project.ext.lwjglVersion = "3.2.3"
 project.ext.jomlVersion = "1.10.5"
 project.ext.lwjglNatives = "natives-windows"
-project.ext.imguiVersion = '1.77-0.17.1'
+project.ext.imguiVersion = '1.81.0'
 
 dependencies {
 
@@ -37,14 +37,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // ImGui
-    implementation "io.imgui.java:binding:$imguiVersion"
-    implementation "io.imgui.java:lwjgl3:$imguiVersion"
-
-    // Include all available natives, but it's likely that you want something specific
-    runtimeOnly "io.imgui.java:natives-windows:$imguiVersion"
-    runtimeOnly "io.imgui.java:natives-windows-x86:$imguiVersion"
-    runtimeOnly "io.imgui.java:natives-linux:$imguiVersion"
-    runtimeOnly "io.imgui.java:natives-linux-x86:$imguiVersion"
+    implementation "io.github.spair:imgui-java-app:$imguiVersion"
+    
 
     // LWJGL
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
