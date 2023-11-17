@@ -7,6 +7,7 @@ public class KeyListener {
 
     private static KeyListener instance;
     private boolean[] keyPressed = new boolean[350];
+    private boolean[] keyBeginPress = new boolean[350];
 
     private KeyListener() {
 
@@ -28,15 +29,25 @@ public class KeyListener {
         if (action == GLFW_PRESS) {
 
             get().keyPressed[key] = true;
+            get().keyBeginPress[key] = true;
         }
         else if (action == GLFW_RELEASE) {
 
             get().keyPressed[key] = false;
+            get().keyBeginPress[key] = false;
         }
     }
 
     public static boolean isKeyPressed(int keyCode) {
 
         return get().keyPressed[keyCode];
+    }
+
+    public static boolean keyBeginPress(int keyCode) {
+
+        boolean result = get().keyBeginPress[keyCode];
+        if (result) get().keyBeginPress[keyCode] = false;
+
+        return result;
     }
 }

@@ -4,9 +4,12 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
 
 import editor.PropertiesWindow;
 import natsuki.GameObject;
+import natsuki.KeyListener;
 import natsuki.MouseListener;
 import natsuki.Prefabs;
 import natsuki.Window;
@@ -80,7 +83,21 @@ public class Gizmo extends Component {
         if (!using) return;
 
         this.activeGameObject = this.propertiesWindow.getActiveGameObject();
-        if (this.activeGameObject != null) this.setActive();
+        if (this.activeGameObject != null) {
+
+            this.setActive();
+
+            // TODO: Move this into its own keyEditorBinding component class
+            if (KeyListener.isKeyPressed(GLFW_KEY_LEFT_CONTROL) && KeyListener.keyBeginPress(GLFW_KEY_D)) {
+
+                GameObject newObj = this.activeGameObject.copy();
+                Window.getScene().addGameObjectToScene(newObj);
+                newObj.transform.position.add(0.1f, 0.1f);
+                this.propertiesWindow.setActiveGameObject(newObj);
+
+                return;
+            }
+        } 
         else {
 
             this.setInactive();
