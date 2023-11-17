@@ -1,13 +1,12 @@
 package natsuki;
 
-import imgui.*;
+import imgui.ImFontAtlas;
+import imgui.ImFontConfig;
+import imgui.ImGui;
+import imgui.ImGuiIO;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;
-import imgui.flag.ImGuiBackendFlags;
-import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiKey;
-import imgui.flag.ImGuiMouseCursor;
 import imgui.flag.ImGuiStyleVar;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
@@ -22,6 +21,7 @@ import static org.lwjgl.opengl.GL30.*;
 import editor.GameViewWindow;
 import editor.MenuBar;
 import editor.PropertiesWindow;
+import editor.SceneHierarchyWindow;
 
 public class ImGuiLayer {
 
@@ -34,6 +34,7 @@ public class ImGuiLayer {
     private GameViewWindow gameViewWindow;
     private PropertiesWindow propertiesWindow;
     private MenuBar menuBar;
+    private SceneHierarchyWindow sceneHierarchyWindow;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture) {
 
@@ -41,6 +42,7 @@ public class ImGuiLayer {
         this.gameViewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
         this.menuBar = new MenuBar();
+        this.sceneHierarchyWindow = new SceneHierarchyWindow();
     }
     
     // Initialize Dear ImGui.
@@ -164,6 +166,7 @@ public class ImGuiLayer {
         gameViewWindow.imGui();
         propertiesWindow.update(dt, currentScene);
         propertiesWindow.imGui();
+        sceneHierarchyWindow.imGui();
 
         endFrame();
     }
