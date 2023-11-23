@@ -17,10 +17,10 @@ public class TranslateGizmo extends Gizmo {
 
             if (xAxisActive && !yAxisActive) {
 
-                activeGameObject.transform.position.x -= MouseListener.getWorldDx();
+                activeGameObject.transform.position.x -= MouseListener.getScreenX();
             } else if (yAxisActive && !xAxisActive) {
 
-                activeGameObject.transform.position.y -= MouseListener.getWorldDy();
+                activeGameObject.transform.position.y -= MouseListener.getScreenY();
             }
         }
 
