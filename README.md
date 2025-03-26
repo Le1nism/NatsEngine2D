@@ -8,4 +8,6 @@
 
 <p align="center">
   powered by Java, OpenGL, IMGui & Natsuki
+
+  (dead project :( )
 </p>
