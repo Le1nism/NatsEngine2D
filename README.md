@@ -1,5 +1,5 @@
 <p align="center">
-2D Graphics Engine
+(Former) 2D Graphics Engine
 </p>
 
 <p align="center">
@@ -8,6 +8,4 @@
 
 <p align="center">
   powered by Java, OpenGL, IMGui & Natsuki
-
-  (dead project :( )
 </p>
